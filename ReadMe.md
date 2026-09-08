@@ -1,10 +1,10 @@
-# DMIT-2008 - **Student Workbook** (Jan 2026) ![Docs](https://img.shields.io/badge/Documentation%20Status-%7E10%25%20Minimal%20Outline-lightgrey?logo=Read%20the%20Docs)
+# DMIT-2008 - **Instructor Workbook** (Sep 2026) ![Docs](https://img.shields.io/badge/Documentation%20Status-%7E10%25%20Minimal%20Outline-lightgrey?logo=Read%20the%20Docs)
 
-> **STUDENT_NAME** - Place your name in this line.
+> **Dan Gilleland**
 
 ## Inside this Repository
 
-This repository is your **Student Workbook** (📝) for participating in the in-class demos and for completing practice homework; your coding work is to be placed in the [*`src/`*](./src/ReadMe.md) folder. Other useful notes can be found in the [**docs** folder](./docs), such as links to [additional Reading Materials](./docs/Readings.md) for the course. Also, you are encouraged to use the [**docs/mynotes**](./docs/mynotes/ReadMe.md) folder to record your notes from each class.
+This repository is *my copy* of your **Student Workbook** (📝) for participating in the in-class demos and for completing practice homework; your coding work is to be placed in the [*`src/`*](./src/ReadMe.md) folder. Other useful notes can be found in the [**docs** folder](./docs), such as links to [additional Reading Materials](./docs/Readings.md) for the course. Also, you are encouraged to use the [**docs/mynotes**](./docs/mynotes/ReadMe.md) folder to record your notes from each class.
 
 > :warning: **Do *NOT*** use this repository for any assignments that are worth marks. For submitting any work that is worth marks in this course, only use repositories set up/approved by your instructor. :warning:
 
