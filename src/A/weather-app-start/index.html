@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title>ES6 Example Weather Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <meta name="theme-color" content="#fafafa" />
+    <script src="js/vendor/modernizr-3.7.1.min.js" defer></script>
+    <script src="js/plugins.js" defer></script>
+    <script src="js/main.js" type="module"></script>
+  </head>
+
+  <body>
+    <form class="frm weather">
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" />
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <section class="weather-display">
+      <h1>Weather Update</h1>
+      <div class="details">Location: <span id="location"></span></div>
+      <div class="details">Date: <span id="date"></span></div>
+      <div class="details">Conditions: <span id="conditions"></span></div>
+      <div class="details">Current Temp: <span id="temp"></span></div>
+      <div class="details">Sunrise: <span id="sunrise"></span></div>
+      <div class="details">Sunset: <span id="sunset"></span></div>
+      <div id="forecast"></div>
+    </section>
+  </body>
+</html>
