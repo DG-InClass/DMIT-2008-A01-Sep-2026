@@ -11,13 +11,9 @@ const { VITE_DEFAULT_CITY, VITE_API_KEY } = import.meta.env;
 console.log(VITE_DEFAULT_CITY, VITE_API_KEY);
 // We now return you to regular code....
 
-// TEMPORARY - Just testing the endpoints so we can get data
-import { getCurrentWeather, getForecast } from './api/open-weather';
-// Unpack the environment variable for the default city.
-const stringParts = VITE_DEFAULT_CITY.split(',');
-console.log(stringParts);
-// Destructuring syntax on an array.
-const [city,country] = stringParts;
-//     [0]    [1]
+import { registerEventListener } from "./ui/city-selection";
 
-getCurrentWeather({city:city, country, callback: console.log});
+const form = document.querySelector('form');
+const outputContainer = document.querySelector('section');
+registerEventListener({form, outputContainer, defaultLocation: VITE_DEFAULT_CITY});
+
