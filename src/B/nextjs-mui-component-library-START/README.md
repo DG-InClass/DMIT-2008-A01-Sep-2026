@@ -1,5 +1,22 @@
 # React Component Library - Material UI
 
+```ps
+# CD to ~/src/b/nextjs-mui-component-library-start
+npx create-next-app@latest mui-demo
+# Use the same settings from the last session
+
+cd mui-demo
+# Add the Material UI dependencies
+npm install @mui/material @emotion/react @emotion/styled
+
+npm run dev
+
+# If you want the MUI Icons, you can add these dependencies
+npm install @mui/lab
+npm install @mui/icons-material
+npm approve-scripts unrs-resolver@1.12.2 
+```
+
 # Why?
 
 Design is difficult, and there's a lot of boilerplate that you don't necessarily need to build from scratch.
