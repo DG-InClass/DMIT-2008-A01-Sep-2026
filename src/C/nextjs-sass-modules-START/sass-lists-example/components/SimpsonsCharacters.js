@@ -10,10 +10,15 @@ const SIMPSON_CHARACTERS = [
   "Ned Flanders",
 ]
 
+import styles from '../styles/SimpsonsCharacters.module.scss';
+
 export default function SimpsonsCharacters() {
-  return <ul>
+  return <ul className={styles.list}>
     {SIMPSON_CHARACTERS.map((characterName, index)=> {
-      return <li key={index}>{characterName}</li>
+      return <li
+            key={index}
+            className={`${styles['list-item']} ${styles.spacing}`}
+          >{characterName}</li>
     })}
   </ul>
 }

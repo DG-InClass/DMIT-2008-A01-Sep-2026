@@ -15,6 +15,10 @@
   },
   "devDependencies": {
     "eslint": "8.16.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "12.1.6",
+    "sass": "^1.105.0"
+  },
+  "allowScripts": {
+    "core-js-pure@3.22.7": true
   }
 }
