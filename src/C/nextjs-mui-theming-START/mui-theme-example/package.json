@@ -19,5 +19,8 @@
   "devDependencies": {
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6"
+  },
+  "allowScripts": {
+    "core-js-pure@3.22.7": true
   }
 }
