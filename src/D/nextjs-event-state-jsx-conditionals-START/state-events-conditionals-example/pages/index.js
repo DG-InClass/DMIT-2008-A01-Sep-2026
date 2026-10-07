@@ -15,7 +15,58 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+// #region Step 1
+import { useState } from 'react';
+// #endregion
+
 export default function Home() {
+  // #region Step 2
+  // Tracking the changes to our input controls on the page
+  const [search, setSearch] = useState("");
+  const [year, setYear] = useState("");
+  // 🦘 Jump to the JSX for the TextField for onChange and value props
+  // The following state holds the movies that we want to display
+  const [movies, setMovies] = useState(MOVIE_LIST); // Showing the full list
+  // #endregion
+
+  // #region Step 3
+  // An event handler for the form where we will update the movies list
+  const handleSubmit = (event) => {
+    event.preventDefault() // stop the browser from submitting the form
+    console.log(`year: ${year}`)
+    console.log(`search: ${search}`)
+    filterMovies(); // Call the function that does all the filtering work
+  }
+  // 🦘 Jump to the JSX for the <form> to add onSubmit props
+
+  const filterMovies = () => {
+    // make a copy of the movie list
+    let filteredMovieList = [...MOVIE_LIST]; // notice the spread operator ...
+    // check if the user has given us some search criteria
+    if (search.trim() !== "") {
+      // loop through the movies and check if the movie name includes
+      // the search value (case-insensitive way)
+      filteredMovieList = filteredMovieList.filter((movieData) => {
+        const movieName = movieData.name.toLowerCase();
+        const searchText = search.trim().toLowerCase();
+        const isMatch = movieName.includes(searchText);
+        return isMatch;
+      });
+    }
+
+    // Check if the user has given us a year to search
+    if (year.trim() !== "") {
+      // TODO: Check that the user input is a real year
+      filteredMovieList = filteredMovieList.filter((movieData) => {
+        return movieData.year === parseInt(year.trim());
+      });
+    }
+
+    // Update the state of our filtered movies
+    setMovies(filteredMovieList);
+  }
+  // #endregion
+
   return (
     <div>
       <Head>
@@ -33,7 +84,8 @@ export default function Home() {
           <Typography variant="h2" component="h2" style={{textAlign: "center"}}>
             Movies
           </Typography>
-          <form style={{width: '100%'}}>
+          <form style={{width: '100%'}}
+                onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <TextField
@@ -41,7 +93,8 @@ export default function Home() {
                   label="search..."
                   variant="standard"
                   sx={{width: '100%'}}
-                  
+                  onChange={(e)=> {setSearch(e.target.value)}}
+                  value={search}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -50,7 +103,8 @@ export default function Home() {
                   label="year"
                   variant="standard"
                   sx={{width: '100%'}}
-                 
+                  onChange={(e)=> {setYear(e.target.value)}}
+                  value={year}
                 />
               </Grid>
               <Grid item xs={2}>
@@ -61,11 +115,29 @@ export default function Home() {
               </Grid>
               <Grid item xs={10}>
                 {/* Add the error message here*/}
+                {
+                  movies.length === 0 ?
+                  <ListItem>
+                    <ListItemText>
+                      <Typography variant="p" component="div">
+                        No results. Please search again.
+                      </Typography>
+                    </ListItemText>
+                  </ListItem>
+                  :
+                  <ListItem>
+                    <ListItemText>
+                      <Typography variant="p" component="div">
+                        {movies.length} movie results.
+                      </Typography>
+                    </ListItemText>
+                  </ListItem>
+                }
               </Grid>
             </Grid>
           </form>
           <List sx={{width: `100%`}}>
-          { MOVIE_LIST.map((movieData, index)=> {
+          { movies.map((movieData, index)=> {
               return <ListItem key={index}>
                 <ListItemText>
                   <Typography variant="p" component="div">
