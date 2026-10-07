@@ -1,6 +1,6 @@
 // components/TodoList.js
 import { useState } from 'react'; // useState() is a React Hook
-import { Box, Button, TextField, Grid } from '@mui/material';
+import { Box, Button, TextField, Grid, List, ListItem, ListItemText, Typography } from '@mui/material';
 
 export default function TodoList() {
     // #region State Management
@@ -9,6 +9,10 @@ export default function TodoList() {
     // 2) In calling useState(), we supply the initial value
     //    for the todoText that we want to manage.
     const [todoText, setTodoText] = useState("");
+
+    // Our list of all the Todo items will be in an array.
+    // We initialize that as an empty array.
+    const [allTodos, setAllTodos] = useState([]);
     // #endregion
 
     // #region Event Handlers
@@ -16,6 +20,13 @@ export default function TodoList() {
         console.log(event.target.value);
         // A) Track the changes in our component state
         setTodoText(event.target.value);
+    }
+
+    const onAddTodoClick = () => {
+        // Create a new list to replace the old list
+        const newAllTodoList = [...allTodos, todoText];
+        setAllTodos(newAllTodoList);
+        setTodoText(""); // clear the current input
     }
     // #endregion
 
@@ -25,8 +36,21 @@ export default function TodoList() {
             onChange={onTodoTextChange}
             value={todoText}
         />
+        <Button variant='contained' onClick={onAddTodoClick} />
         <Grid item xs={12}>
-            Current input text: {todoText}
+            <List sx={{width: '100%'}}>
+                {
+                    allTodos.map((item, index) => 
+                        <ListItem key={index}>
+                            <ListItemText>
+                                <Typography variant='p' component='div'>
+                                    {item}
+                                </Typography>
+                            </ListItemText>
+                        </ListItem>
+                    )
+                }
+            </List>
         </Grid>
     </>
 }
