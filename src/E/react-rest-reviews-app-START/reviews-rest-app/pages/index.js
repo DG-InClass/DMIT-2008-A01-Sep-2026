@@ -27,14 +27,32 @@ import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-
+// #region Step 2
+import { useState } from 'react';
+import AdaptationReviewCard from '../components/AdaptationReviewCard';
+// 🦘 Jump to the JSX where we do {MOCK_ADAPTATION_RATING.map((adaptation, index)=> {
+// (approximately lines 123)
+// #endregion
 
 export default function Home() {
-  const MOCK_ADAPTATION_RATING = [{
-    'title': 'Fight Club',
-    'comment': 'Great movie and book',
-    'rating': 10
-  }]
+  // We'll use React's state to track the data we pulled from the API
+  const [reviews, setReviews] = useState([]); // init with an empty array
+
+  const loadAllReviews = () => {
+    console.log('Load All Reviews button works');
+    // TODO: move the API calls to a separate file
+    fetch('http://localhost:5000/reviews')
+      .then((response)=> {
+        // TODO: Verify that we got a good response
+        return response.json();
+      }).then((data) => {
+        console.log(data);
+        setReviews(data); // Capture the API data in our React state
+      }).catch((error) => {
+        console.error(`Something went wrong!\n ${error}`);
+      });
+  }
+
   return (
     <div>
       <Head>
@@ -110,32 +128,18 @@ export default function Home() {
           >
             <Button
               variant="contained"
+              onClick={loadAllReviews}
             >
               Load All Current Reviews
             </Button>
           </Box>
-          {MOCK_ADAPTATION_RATING.map((adaptation, index)=> {
-            return <Card key={index}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: 'blue' }} aria-label="recipe">
-                    {adaptation.rating}
-                  </Avatar>
-                }
-                
-                title={
-                  <Typography variant="body2" color="text.secondary">
-                    {adaptation.title}
-                  </Typography>
-                }
-                
+          {reviews.map((adaptation, index)=> {
+            return <AdaptationReviewCard
+                key={index}
+                rating={adaptation.rating}
+                title={adaptation.title}
+                comment={adaptation.comment} 
               />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {adaptation.comment}
-                </Typography>
-              </CardContent>
-            </Card>
           })}
 
         </Container>
