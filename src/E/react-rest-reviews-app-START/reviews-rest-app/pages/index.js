@@ -34,31 +34,25 @@ import AdaptationReviewCard from '../components/AdaptationReviewCard';
 // (approximately lines 123)
 // #endregion
 
+import { getReviews, postReview } from '../utils/reviews';
+
 export default function Home() {
+  // #region Component State
   // We'll use React's state to track the data we pulled from the API
   const [reviews, setReviews] = useState([]); // init with an empty array
   // We'll also use React's state hook to track our user input from the form
   const [title, setTitle] = useState("");
   const [comments, setComments] = useState("");
   const [rating, setRating] = useState(0); // Number
+  // #endregion
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Stop the form from posting
     console.log('handling form submit:', {title, comments, rating});
-    // TODO: move the API calls to a separate file
-    fetch('http://localhost:5000/reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title,
-        comment: comments,
-        rating
-      })
-    }).then((response) => {
-      // TODO: Verify that we got a good response
-      return response.json();
+    postReview({
+      title,
+      comment: comments,
+      rating
     }).then((data) => {
       console.log('Added a new review to the backend\n',data);
     }).catch((error) => {
@@ -69,11 +63,7 @@ export default function Home() {
   const loadAllReviews = () => {
     console.log('Load All Reviews button works');
     // TODO: move the API calls to a separate file
-    fetch('http://localhost:5000/reviews')
-      .then((response)=> {
-        // TODO: Verify that we got a good response
-        return response.json();
-      }).then((data) => {
+    getReviews().then((data) => {
         console.log(data);
         setReviews(data); // Capture the API data in our React state
       }).catch((error) => {
