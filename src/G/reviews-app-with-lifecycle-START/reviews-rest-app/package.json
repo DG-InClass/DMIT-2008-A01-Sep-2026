@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
-    "@mui/icons-material": "5.8.5",
-    "@mui/material": "5.8.5",
+    "@mui/icons-material": "^5.10.2",
+    "@mui/material": "^5.10.2",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -20,5 +20,8 @@
   "devDependencies": {
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6"
+  },
+  "allowScripts": {
+    "core-js-pure@3.23.2": true
   }
 }

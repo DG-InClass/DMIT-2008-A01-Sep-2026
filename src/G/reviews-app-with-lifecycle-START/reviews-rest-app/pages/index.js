@@ -1,5 +1,5 @@
-import {useState} from 'react'
-
+import {useState, useEffect} from 'react'
+// #region Other Imports
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -24,14 +24,27 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import AdaptationReviewCard from '../components/AdaptationReviewCard'
-
+// #endregion
 import { getReviews, postReview } from '../utils/api/reviews.js'
 
 export default function Home() {
+  // You should call the React hooks you need
+  // as the first items in your component
   const [reviews, setReviews] = useState([])
   const [title, setTitle] = useState("")
   const [comments, setComments] = useState("")
   const [rating, setRating] = useState(0)
+
+  useEffect(() => {
+    console.log('Home component mounted');
+    loadAllReviews();
+  }, []);
+
+  const deleteReviewItem = (deleteReviewId) => {
+    // These two lines will remove the review from our component's state
+    let allReviews = reviews.filter((review) => review.id !== deleteReviewId);
+    setReviews(allReviews);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -44,7 +57,7 @@ export default function Home() {
       })
   }
 
-  const loadAllReviewsButton = () => {
+  const loadAllReviews = () => {
     getReviews().then((data)=> {
       setReviews(data)
     })
@@ -136,16 +149,13 @@ export default function Home() {
               pb: 2,
             }}
           >
-            <Button
-              variant="contained"
-              onClick={loadAllReviewsButton}
-            >
-              Load All Current Reviews
-            </Button>
+
           </Box>
           {reviews.map((adaptation, index)=> {
             return <AdaptationReviewCard
                 key={index}
+                id={adaptation.id}
+                deleteCallback={deleteReviewItem}
                 rating={adaptation.rating}
                 title={adaptation.title}
                 comment={adaptation.comment}

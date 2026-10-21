@@ -12,4 +12,14 @@ The following starter kits are for in-class and/or practice work in DMIT-2008. T
     ![](./img/directory_import_error.png)
 
   - The fix was to remove and then re-add that dependency with the correct verion: `npm install @mui/icons-material@5.10.2`
+
+    ```
+    npm uninstall @mui/icons-material
+    npm uninstall @mui/material
+    npm install @mui/material@5.10.2
+    npm install @mui/icons-material@5.10.2
+
+    npm install-scripts approve --all
+    ```
+
 - [~~Mounting Fundamentals~~](./react-mounting-fundamentals-START/README.md) - TO BE REPLACED...
