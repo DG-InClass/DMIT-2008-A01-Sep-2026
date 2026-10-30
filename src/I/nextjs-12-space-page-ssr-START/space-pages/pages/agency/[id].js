@@ -14,17 +14,30 @@ import LoadingCircle from '@components/LoadingCircle'
 
 import {getAgency} from '@utils/api/agencies'
 
-export default function Agency() {
-  const [agencyDetails, setAgencyDetails] = useState()
+export async function getServerSideProps(context) {
+  const { id } = context.params; // "replaces" my useRouter() hook
 
-  const router = useRouter()
-  const { id } = router.query
+  const agencyInfo = await getAgency(id);
 
-  useEffect(()=> {
-      getAgency(id).then((data)=> {
-          setAgencyDetails(data)
-      })
-  }, [id])
+  return {
+    props: {
+      id: id,
+      agencyDetails: agencyInfo
+    }
+  }
+}
+
+export default function Agency({id, agencyDetails}) {
+  // const [agencyDetails, setAgencyDetails] = useState()
+
+  // const router = useRouter()
+  // const { id } = router.query
+
+  // useEffect(()=> {
+  //     getAgency(id).then((data)=> {
+  //         setAgencyDetails(data)
+  //     })
+  // }, [id])
 
   return <>
     <NavBar />

@@ -13,16 +13,30 @@ import NavBar from '@components/NavBar';
 
 import { getAgencies } from '@utils/api/agencies'
 
-export default function Home() {
-  const [agenciesData, setAgenciesData] = useState([])
+export async function getServerSideProps(context) {
+  const agencies = await getAgencies(); // 💫 Good use of await
+  console.log(agencies); // This log output will be in the terminal, not in the browser
+  return {
+    // The props name is the important/critical part for NextJS
+    props: {
+      // Any of the properties at this level can be
+      // whatever we need them to be.
+      agenciesData: agencies.results
+    }
+  }
+}
+
+export default function Home({agenciesData}) {
+
+  // const [agenciesData, setAgenciesData] = useState([])
   
-  useEffect(()=> {
-    // fire this on load.
-    getAgencies().then((data)=> {
-      console.log(data)
-      setAgenciesData(data.results)
-    })
-  }, [])
+  // useEffect(()=> {
+  //   // fire this on load.
+  //   getAgencies().then((data)=> {
+  //     console.log(data)
+  //     setAgenciesData(data.results)
+  //   })
+  // }, [])
 
 
   return (
